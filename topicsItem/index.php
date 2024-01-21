@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $topic = $data['topic'];
     $id = $_GET['id'];
 
-    $result = $conn->query("UPDATE $tbName SET `topic`=$topic  WHERE id=$id");
+    $result = $conn->query("UPDATE $tbName SET `topic`='$topic'  WHERE id=$id");
 
     if ($result) {
         echo json_encode(array('messages' =>  $tbName. 'update successfully'));

@@ -12,10 +12,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // Handle POST request for creating a new user
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-
+    $systemName = $data['systemName']; 
     $email = $data['email']; 
     $password = md5($data['password']); 
-    $result = $conn->query("SELECT * FROM users WHERE email='$email' AND password='$password'");
+    $result = $conn->query("SELECT * FROM users WHERE email='$email' AND password='$password' AND systemName='$systemName'");
         
     $users = array();
     while ($row = $result->fetch_assoc()) {
@@ -23,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($result) {
         echo json_encode($users);
-    } 
+    }else{
+        echo json_encode($users);
+    }
 }
 // Close the database connection
 $conn->close();
