@@ -1,4 +1,4 @@
-Database:	sasirest_laedkku
+Database:	alllaedk_leadkku
 Host:	localhost
-Username:	sasirest_laedkku
+Username:	alllaedk_leadkku
 Password:	0983460756

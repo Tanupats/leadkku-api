@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $systemName = $data['systemName'];
 
     $sql = "INSERT INTO users (`name`, `email`, `profile`, `password`, `role`, `systemName`)
-                        VALUES ('$name', '$email','$profile','$password','$role',' $systemName')";
+                        VALUES ('$name', '$email','$profile','$password','$role','$systemName')";
     
     if ($conn->query($sql) === TRUE) {
         echo json_encode(array('message' => 'User created successfully'));

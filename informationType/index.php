@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $data = json_decode(file_get_contents('php://input'), true);
     $name = $data['typeName'];
-    $id = $data['id'];
+    $id = $_GET['id'];
     
     $result = $conn->query("UPDATE `informationtype` SET `typeName`='$name' WHERE InformationTypeId='$id'");
 

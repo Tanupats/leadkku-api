@@ -36,8 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query("INSERT INTO $tbName (`name`,`groupName`,`document`) VALUES 
                                                 ('$name','$groupName','$document')");
 
+
     if ($result) {
-        echo json_encode(array('messages' => 'education created successfully'));
+        $last_id = $conn->insert_id;
+        echo json_encode(
+            array(
+                'messages' => 'education created successfully',
+                'id' => $last_id
+            )
+        );
     }
 }
 
@@ -69,4 +76,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
 // Close the database connection
 $conn->close();
-?>

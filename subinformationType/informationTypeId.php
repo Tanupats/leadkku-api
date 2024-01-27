@@ -1,7 +1,6 @@
 <?php
 // Include the database connection file
 include '../dbcon.php';
-include '../dbcon.php';
 // Set the content type to JSON
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
@@ -15,13 +14,15 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // Handle POST request for creating a new user
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $id = $_GET['id'];
-    $result = $conn->query("SELECT * FROM `informationtype` WHERE InformationTypeId ='$id'");
+    $result = $conn->query("SELECT * FROM `subinformation` WHERE InformationTypeId ='$id'");
     $users = array();
     while ($row = $result->fetch_assoc()) {
         $users[] = $row;
     }
 
     if ($users) {
+        echo json_encode($users);
+    }else{
         echo json_encode($users);
     }
 }

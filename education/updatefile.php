@@ -9,27 +9,21 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+$tbName = 'education';
 
+if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+    $data = json_decode(file_get_contents('php://input'), true);
 
-// Handle POST request for creating a new user
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $document = $data['path'];
     $id = $_GET['id'];
-    $result = $conn->query("SELECT * FROM educationdetail WHERE educationId='$id'");
-    $users = array();
-    while ($row = $result->fetch_assoc()) {
-        $users[] = $row;
-    }
 
-    if ($users) {
-        echo json_encode($users);
-    }else{
-        echo json_encode($users);
+    $result = $conn->query("UPDATE $tbName SET document='$document' WHERE educationId='$id'");
+
+    if ($result) {
+        echo json_encode(array('messages' => 'education updateFile successfully'));
     }
 }
 
 
-
-
-// Close the database connection
 $conn->close();
 ?>

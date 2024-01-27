@@ -12,15 +12,26 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    $target_dir = "../uploads/";
-    $target_file = $target_dir . basename($_FILES["file"]["name"]);
 
-    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+    $filename = $_FILES['file'];
+
+    // ใช้ pathinfo เพื่อดึงข้อมูลเกี่ยวกับไฟล์
+
+
+    $ext = strtolower(pathinfo(basename($filename['name']),PATHINFO_EXTENSION));
+    
+
+    $newfileName = uniqid();
+    $target_dir = "uploads/".$newfileName.'.'.$ext;
+   
+    
+    $target_path  = $target_dir;
+
+    move_uploaded_file($_FILES["file"]["tmp_name"],"../".$target_path );
 
     echo json_encode(array(
-        'path' =>  "uploads/" . basename($_FILES["file"]["name"]),
-        'messages' => 'has been uploaded'
+        'path' =>  $target_path,
+        'messages' => 'file uploaded'
     ));
 }
 
